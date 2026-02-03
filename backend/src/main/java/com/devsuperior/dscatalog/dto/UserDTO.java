@@ -1,79 +1,78 @@
 package com.devsuperior.dscatalog.dto;
 
+import com.devsuperior.dscatalog.entities.User;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+public class UserDTO {
 
-import com.devsuperior.dscatalog.entities.User;
+    private Long id;
 
-public class UserDTO implements Serializable {
-	private static final long serialVersionUID = 1L;
+    @NotBlank(message = "Campo obrigatório")
+    private String firstName;
+    private String lastName;
 
-	private Long id;
-	
-	@NotBlank(message = "Campo obrigatório")
-	private String firstName;
-	private String lastName;
+    @Email(message = "Insira um email valido")
+    private String email;
 
-	@Email(message = "Favor entrar um email válido")
-	private String email;
-	
-	Set<RoleDTO> roles = new HashSet<>();
-	
-	public UserDTO() {
-	}
+    Set<RoleDTO> roles =  new HashSet<>();
 
-	public UserDTO(Long id, String firstName, String lastName, String email) {
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-	}
-	
-	public UserDTO(User entity) {
-		id = entity.getId();
-		firstName = entity.getFirstName();
-		lastName = entity.getLastName();
-		email = entity.getEmail();
-		entity.getRoles().forEach(role -> this.roles.add(new RoleDTO(role)));
-	}
+    public UserDTO(){
 
-	public Long getId() {
-		return id;
-	}
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public UserDTO(Long id, String firstName, String lastName, String email) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
 
-	public String getFirstName() {
-		return firstName;
-	}
+    public UserDTO(User entity) {
+        id = entity.getId();
+        firstName = entity.getFirstName();
+        lastName = entity.getLastName();
+        email = entity.getEmail();
+        entity.getRoles().forEach(role -> this.roles.add(new RoleDTO(role)));
+    }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public Set<RoleDTO> getRoles() {
-		return roles;
-	}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Set<RoleDTO> getRoles() {
+        return roles;
+    }
 }
